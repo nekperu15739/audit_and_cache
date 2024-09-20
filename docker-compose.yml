@@ -1,0 +1,13 @@
+services:
+  student-db:
+    platform: linux/amd64
+    image: mysql/mysql-server
+    restart: always
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cache
+      MYSQL_USER: cache
+      MYSQL_PASSWORD: cache
+    ports:
+      - "3317:3306"

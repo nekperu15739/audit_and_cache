@@ -1,0 +1,24 @@
+### write
+POST http://127.0.0.1:8080/students
+Content-Type: application/json
+
+{
+  "name": "{{$random.alphabetic(10)}}"
+}
+
+> {%
+client.global.set("studentId", response.body.id)
+%}
+
+### Update
+PUT http://127.0.0.1:8080/students/{{studentId}}
+Content-Type: application/json
+
+{
+  "id": "{{studentId}}",
+  "name": "{{$random.alphabetic(10)}}"
+}
+
+### read
+GET http://127.0.0.1:8080/students/{{studentId}}
+

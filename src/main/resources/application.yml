@@ -1,0 +1,30 @@
+spring:
+  docker:
+    compose:
+      lifecycle-management: start_and_stop
+  cache:
+    type: hazelcast
+    cache-names: mids
+    redis:
+      time-to-live: "360s"
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: org.apache.tomcat.jdbc.pool.DataSource
+    url: jdbc:mysql://localhost:3317/cache
+    password: cache
+    username: cache
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+
+logging:
+  level:
+#    org.springframework.cache.interceptor.CacheAspectSupport : trace
+#    org.springframework.cache: trace
+#    org.hibernate.type.descriptor.sql: trace
+#    org.hibernate.SQL: debug
+#    org.springframework.orm.jpa: debug
+#    root: debug
+    org.springframework.transaction: trace

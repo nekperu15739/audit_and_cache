@@ -22,3 +22,49 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+/.sdkmanrc
+
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### jenv ###
+.java-version
+
+### galaxy ###
+.galaxy
+
+### other resources ###
+**/.DS_Store
+wiremock-standalone.jar
+
+## liquibase ##
+liquibase.properties
+
+## xml generation ##
+sun-jaxb.episode
