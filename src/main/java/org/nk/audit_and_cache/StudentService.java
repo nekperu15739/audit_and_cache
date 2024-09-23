@@ -4,27 +4,28 @@ import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = StudentRepository.MIDS)
 public class StudentService {
 
   private final StudentRepository studentRepository;
+  private final StudentUpdater updater;
 
   @Transactional
   public StudentModel create(final StudentModel studentModel) {
     return studentRepository.save(studentModel);
   }
 
-  @Transactional
+  @CachePut(key = "#result.id")
   public StudentModel update(final StudentModel studentModel, final UUID id) {
-    return studentRepository.findById(id)
-        .map(s -> s.withName(studentModel.getName()))
-        .map(studentRepository::save)
-        .orElseThrow(RuntimeException::new);
+    return updater.update(studentModel, id);
   }
 
   @Transactional(readOnly = true)

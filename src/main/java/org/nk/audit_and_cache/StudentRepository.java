@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -25,7 +24,6 @@ public interface StudentRepository extends JpaRepository<StudentModel, UUID> {
   List<StudentModel> findAll();
 
   @Override
-  @CachePut(key = "#result.id")
   @Modifying
   @Transactional
   StudentModel save(StudentModel entity);
