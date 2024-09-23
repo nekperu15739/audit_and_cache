@@ -1,7 +1,7 @@
 services:
   student-db:
     platform: linux/amd64
-    image: mysql/mysql-server
+    image: mysql
     restart: always
     environment:
       MYSQL_ROOT_HOST: '%'

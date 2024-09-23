@@ -10,12 +10,17 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.support.RestClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
+import org.testcontainers.containers.MySQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
+@Testcontainers
 @SpringBootTest(
     webEnvironment = WebEnvironment.RANDOM_PORT,
     properties = {
@@ -24,6 +29,10 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 )
 @AutoConfigureMockMvc
 class AuditAndCacheApplicationTests {
+
+  @Container
+  @ServiceConnection
+  private static final MySQLContainer mySQLContainer = new MySQLContainer<>("mysql");
 
   @Test
   void check_db_and_cache_sync(@Autowired final StudentClient studentClient) {
